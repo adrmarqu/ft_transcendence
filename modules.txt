@@ -1,0 +1,105 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    modules.txt                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/15 13:30:05 by adrmarqu          #+#    #+#              #
+#    Updated: 2025/11/15 13:49:34 by adrmarqu         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+7 major modules = 100%
+2.5 major modules = 125%
+
+1 major module = 2 minor modules
+1 major module = 10 points
+1 minor module = 5 points
+
+WEB
+
+	Major
+	
+		- Use a framework to build the backend
+		- Store the score of a tournament in the Blockchain
+
+	Minor
+
+		- Use a framework or a toolkit to build the frontend
+		- Use a database for the backend
+
+USER MANAGEMENT
+
+	Major
+	
+		- Standrd user management, authentication, user across tournaments
+		- Implementing a remote authentication
+
+GAMEPLAY AND USER EXPERIENCE
+
+	Major
+	
+		- Remote players
+		- Multiplayer (more than 2 players in the same game)
+		- Add another game with history and matchmaking
+		- Live chat
+
+	Minor
+
+		- Game customization options
+
+AI_ALGORITHM
+
+	Major
+	
+		- Introduce an AI opponent
+
+	Minor
+
+		- User and game stats dashboards
+
+CYBERSECURITY
+
+	Major
+	
+		- Implement WAF/ModSecurity with a hardened configuration and HashiCorp Vault for secrets management
+		- Implement Two-Factor Authenticaion (2FA) and JWT
+
+	Minor
+
+		- GDPR compliance options with user anonymation, local data management, and Account Deletion
+
+DEVOPS
+
+	Major
+	
+		- Infrastructure setup for log management
+		- Designing the backend as microservices
+
+	Minor
+
+		- Monitoring system
+
+GRAPHICS
+
+	Major
+	
+		- Use advanced 3D techniques
+
+ACCESIBILITY
+
+	Minor
+
+		- Support on all devices
+		- Expanding browser compatibility
+		- Supports multile languages
+		- Add accesibility features for visually impaired users
+		- Server-Side Rendering (SSR) integration
+
+SERVER-SIDE PONG
+
+	Major
+	
+		- Replace basic Pong with server-side Pong and implement an API
+		- Enabling Pong gameplay via CLI against web users with API integration
