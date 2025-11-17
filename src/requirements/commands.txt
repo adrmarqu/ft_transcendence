@@ -1,3 +1,5 @@
+Instalar
+
 Iniciar
 
 npm --prefix ./packages start			--> Cuando bs-config esta en packages
