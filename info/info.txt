@@ -1,0 +1,63 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    info.txt                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/15 13:52:54 by adrmarqu          #+#    #+#              #
+#    Updated: 2025/11/15 14:40:46 by adrmarqu         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+Projecto sin modulos
+
+1- Sitio web en una sola pagina
+	- Sin recargar nada
+	- Que funcione en firefox ultima version
+	- Sin errores
+
+2- Juego Pong
+	- Jugable en tiempo real
+	- Dos jugadores en el mismo teclado minimo
+	- un torneo donde varios jugadores introducen alias (que pueden estar vacios) y juegan en rounds
+	- Un sistema de matchmaking
+	- Igualdad en reglas (misma velocidad, mismo size...)
+
+3- Registro simple para torneos
+	- No son cuentas de usuarios reales: solo escribir un alias para participar
+
+4- Infraestructura minima
+	- Si usas backend: debe de ser en PHP puro
+	- Frontend obigatorio en TypeScript
+	- Si usas BBDD: debe de ser SQLite
+	- Usar Docker, y todo debe de arrancar con un solo comando
+
+5- Seguridad basica
+	- HTTPS obligatorio
+	- Validacion de formularios
+	- Proteger con XSS y SQL injection
+	- Hash de passwords (si usas cuentas o bases de datos)
+
+
+PONG reglas
+
+	- Dos palos: uno a la izquierda y otro a la derecha
+	- Una pelota que rebota en las paredes superior e inferior
+	- Un jugador pierde un punto cuando la pelota pasa detras de su paddle
+	- El juego continua hast un puntuaje determinado que tu elijas
+	- En caso de multiplayer: 3-6 jugadores en una partida con modulo de remote players recomendado
+
+
+src/
+ ├─ index.ts          -> punto de entrada
+ ├─ game/
+ │    ├─ pong.ts      -> lógica física del Pong
+ │    ├─ paddle.ts    -> paddle y controles
+ │    ├─ ball.ts      -> movimiento y rebotes
+ │    └─ multiplayer.ts -> lógica de más jugadores
+ ├─ ui/
+ │    ├─ render.ts    -> dibujar en canvas/HTML
+ │    └─ screens.ts   -> vistas (tournament, menú)
+ └─ types/
+       └─ types.ts    -> tipos globales

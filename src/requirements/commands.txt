@@ -1,0 +1,9 @@
+Iniciar
+
+npm --prefix ./packages start			--> Cuando bs-config esta en packages
+npx --prefix ./packages lite-server		--> Cuando bs-config esta en raiz
+
+
+Compilar
+
+npx --prefix ./packages tsc
