@@ -1,0 +1,22 @@
+html
+{
+	background-color: gray;
+}
+
+h1
+{
+	color: white;
+	border: 5px solid white;
+}
+
+h2, h3
+{
+	color: yellow;
+}
+
+p
+{
+	color: green;
+	width: 100px;
+}
+
