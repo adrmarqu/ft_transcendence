@@ -1,0 +1,204 @@
+version: "3.9"
+
+services:
+  ############################################################
+  # FRONTEND  (Mandatory base project + FrontEnd module)
+  ############################################################
+  frontend:
+    build: ./frontend   # => Tiene Dockerfile
+    container_name: frontend
+    depends_on:
+      - api-gateway
+    networks:
+      - app
+    ports:
+      - "8080:80"
+
+  ############################################################
+  # SSR RENDERER (Accessibility → SSR module)
+  ############################################################
+  ssr-renderer:
+    build: ./ssr   # => Tiene Dockerfile
+    container_name: ssr-renderer
+    networks:
+      - app
+
+  ############################################################
+  # API GATEWAY (DevOps → Microservices)
+  # Puede ser Nginx o Fastify-Gateway. Si usas WAF, va delante.
+  ############################################################
+  api-gateway:
+    build: ./gateway   # => Tiene Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - waf
+    networks:
+      - app
+    ports:
+      - "3000:3000"
+
+  ############################################################
+  # WAF / MODSECURITY (Cybersecurity → Major WAF Module)
+  ############################################################
+  waf:
+    build: ./waf   # => Tiene Dockerfile (Nginx + ModSecurity)
+    container_name: waf
+    networks:
+      - app
+
+  ############################################################
+  # AUTH SERVICE  (DevOps → Microservices + User Management)
+  ############################################################
+  auth-service:
+    build: ./services/auth    # => Tiene Dockerfile
+    container_name: auth-service
+    networks:
+      - app
+    depends_on:
+      - vault
+
+  ############################################################
+  # GAME SERVICE (DevOps → Microservices + Server-Side Pong)
+  ############################################################
+  game-service:
+    build: ./services/game    # => Tiene Dockerfile
+    container_name: game-service
+    networks:
+      - app
+
+  ############################################################
+  # CHAT SERVICE (Gameplay → Live Chat) (DevOps → Microservices)
+  ############################################################
+  chat-service:
+    build: ./services/chat    # => Tiene Dockerfile
+    container_name: chat-service
+    networks:
+      - app
+
+  ############################################################
+  # HASHICORP VAULT (Cybersecurity → Vault module)
+  ############################################################
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    networks:
+      - app
+    ports:
+      - "8200:8200"
+
+  ############################################################
+  # ELASTICSEARCH (DevOps → ELK major module)
+  ############################################################
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    networks:
+      - app
+
+  ############################################################
+  # LOGSTASH (DevOps → ELK major module)
+  ############################################################
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.12.0
+    container_name: logstash
+    depends_on:
+      - elasticsearch
+    networks:
+      - app
+
+  ############################################################
+  # KIBANA (DevOps → ELK major module)
+  ############################################################
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.12.0
+    container_name: kibana
+    networks:
+      - app
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  ############################################################
+  # PROMETHEUS (DevOps → Monitoring minor module)
+  ############################################################
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    networks:
+      - app
+    ports:
+      - "9090:9090"
+
+  ############################################################
+  # GRAFANA (DevOps → Monitoring minor module)
+  ############################################################
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    networks:
+      - app
+    ports:
+      - "3001:3000"
+
+  ############################################################
+  # AVALANCHE NODE (Web → Blockchain major module)
+  ############################################################
+  avalanche-node:
+    image: avaplatform/avalanche
+    container_name: avalanche-node
+    networks:
+      - app
+    ports:
+      - "9650:9650"
+
+  ############################################################
+  # CLI SERVICE (Server-Side Pong → CLI vs Web module)
+  ############################################################
+  cli-service:
+    build: ./cli    # => Tiene Dockerfile
+    container_name: cli-service
+    networks:
+      - app
+    depends_on:
+      - game-service
+
+############################################################
+# NETWORKS
+############################################################
+networks:
+  app:
+    driver: bridge
+
+Backend(microservicios): auth-service, game-service, chat-service, waf, api-gateway
+
+| Servicio           | ¿De qué módulo viene?                     | ¿Requiere Dockerfile? |
+| ------------------ | ----------------------------------------- | --------------------- |
+| **frontend**       | Mandatory + FrontEnd Module               | ✔ Sí                  |
+| **ssr-renderer**   | Accessibility → SSR                       | ✔ Sí                  |
+| **api-gateway**    | DevOps → Microservices                    | ✔ Sí                  |
+| **waf**            | Cybersecurity → WAF/ModSecurity (major)   | ✔ Sí                  |
+| **auth-service**   | DevOps → Microservices + User Management  | ✔ Sí                  |
+| **game-service**   | DevOps → Microservices + Server-Side Pong | ✔ Sí                  |
+| **chat-service**   | DevOps → Microservices + Live Chat        | ✔ Sí                  |
+| **vault**          | Cybersecurity → Vault (major)             | ❌ No (imagen oficial) |
+| **elasticsearch**  | DevOps → ELK (major)                      | ❌ No                  |
+| **logstash**       | DevOps → ELK (major)                      | ❌ No                  |
+| **kibana**         | DevOps → ELK (major)                      | ❌ No                  |
+| **prometheus**     | DevOps → Monitoring (minor)               | ❌ No                  |
+| **grafana**        | DevOps → Monitoring (minor)               | ❌ No                  |
+| **avalanche-node** | Web → Blockchain (major)                  | ❌ No (imagen oficial) |
+| **cli-service**    | Server-Side Pong → CLI vs Web             | ✔ Sí                  |
+
+
+Frontend:   HTML, CSS, TYPESCRIPT;
+            Tailwind CSS (opcional modulo menor);
+            Babylon.js (modulo de graficos);
+            Renderizado pero con TS (modulo SSR);
+
+
+

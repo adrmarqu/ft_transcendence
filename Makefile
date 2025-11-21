@@ -1,18 +1,29 @@
-DC = docker-compose -f ./src/docker-compose.yml
+# Path to docker-compose
+COMPOSE = docker compose -f src/docker-compose.yml
 
-all: build up open
+# Default target -> build and run
+all: up
 
+# Build all services
 build:
-	$(DC) build
+	$(COMPOSE) build
 
+# Start containers
 up:
-	$(DC) up -d
+	$(COMPOSE) up --build
 
+# Stop containers
 down:
-	$(DC) down
+	$(COMPOSE) down
 
-open:
-	sleep 3
-	firefox http://localhost:3000 &
+# Remove containers + images
+clean:
+	$(COMPOSE) down --rmi all --volumes --remove-orphans
 
-.PHONY: all build up down open
+# Reset frontend build (optional)
+fclean: clean
+	rm -rf src/requirements/frontend/dist
+
+re: fclean all
+
+.PHONY: all build up down clean fclean re

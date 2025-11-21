@@ -3,5 +3,4 @@ services:
     build: ./requirements/frontend
     ports:
       - "3000:3000"
-    volumes:
-      - ./requirements/frontend:/app
+    image: sample_frontend

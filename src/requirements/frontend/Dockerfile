@@ -1,15 +1,9 @@
-FROM node:lts-alpine
-
+FROM node:18 AS build
 WORKDIR /app
-
-COPY package.json yarn.lock tsconfig.json ./
-
-RUN yarn install && yarn global add server typescript
-
 COPY . .
+RUN npm install -g typescript && tsc main.ts --outDir dist
 
-RUN tsc
-
-EXPOSE 3000
-
-CMD ["serve", ".", "-l", "3000"]
+FROM nginx:alpine
+COPY dist /usr/share/nginx/html
+COPY index.html /usr/share/nginx/html
+COPY styles.css /usr/share/nginx/html
