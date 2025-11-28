@@ -1,0 +1,85 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    basic.txt                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: adrmarqu <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/28 12:14:35 by adrmarqu          #+#    #+#              #
+#    Updated: 2025/11/28 12:26:44 by adrmarqu         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+----- REQUISITOS TECNICOS MINIMOS -----
+
+1- SPA (Single Page Application)
+	- Solo una pagina real (index.html)
+	- Todo cambia dinamicamente utilizando javascript/typescript
+	- El usuario debe poder utilizar Back/Forward del navegador
+
+2- Frontend en typescript
+	- Todo el .js ha de ser .ts compilado
+	- No usar frameworks (React, Vue, Angular...)
+	- Se puede utilizar .css
+	- No se puede usar tailwind, bootstrap... (a menos que escojas el modulo de frontend)
+
+3- Compatible con firefox
+
+4- Sin errores ni warnings visibles
+
+5- Lanzamiento con Docker
+	- Un solo comando make o docker compose up
+	- Debe levantar tu web automaticamente
+	- Debe estar en contenedores
+
+6- Si se usa backend en php puro
+
+
+----- JUEGO PONG -----
+
+1- Dos jugadores en el mismo teclado
+	- W/S
+	- up/down
+
+2- Movimiento suave, colisiones, rebotes, puntos
+	- Pelota se mueve
+	- Rebote en paredes
+	- Rebote en palas
+	- Sistema de puntuacion
+
+3- Velocidad igual para todos
+	- Misma velocidad de movimiento para las palas de los jugadores
+
+4- Torneo simple
+	- Lista de jugadores
+	- Emparejamiento
+
+5- Registro de alias
+	- Cuando empieza un torneo, los jugadores escriben su alias
+	- No es un sistema de usuarios, solo un input simple
+
+6- Generar lista de partidas
+	- Tu decides como
+
+7- Mostrar quien juega ahora y quien juega luego
+
+8- Pasar de partida a partida automaticamente
+
+
+----- SEGURIDAD BASICA -----
+
+1- Validar inputs en frontend
+	- No dejar meter cosas raras
+
+2- Evitar XSS
+	- No usar innerHTML con datos sin filtrar
+
+
+----- ESTRUCTURA DE DOCKER OBLIGATORIA -----
+
+1- Tener un Dockerfile que sirva tu web
+
+2- Tener un makefile que lo lance todo
+
+3- No usar bind mounts si tu Docker es rootless
+
