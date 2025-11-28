@@ -1,9 +1,12 @@
-FROM node:18 AS build
-WORKDIR /app
-COPY . .
-RUN npm install -g typescript && tsc main.ts --outDir dist
+FROM node:18-alpine
 
-FROM nginx:alpine
-COPY dist /usr/share/nginx/html
-COPY index.html /usr/share/nginx/html
-COPY styles.css /usr/share/nginx/html
+WORKDIR /app
+
+COPY . .
+
+RUN npm install -g typescript http-server
+RUN tsc
+
+EXPOSE 8080
+
+CMD ["http-server", "-p", "8080"]

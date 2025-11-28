@@ -1,29 +1,15 @@
-# Path to docker-compose
-COMPOSE = docker compose -f src/docker-compose.yml
+FRONTEND_DIR=src/requirements/frontend
 
-# Default target -> build and run
-all: up
+all: build run
 
-# Build all services
 build:
-	$(COMPOSE) build
+	docker build -t ft_trans_frontend $(FRONTEND_DIR)
 
-# Start containers
-up:
-	$(COMPOSE) up --build
+run:
+	docker run -p 8080:8080 ft_trans_frontend
 
-# Stop containers
-down:
-	$(COMPOSE) down
-
-# Remove containers + images
 clean:
-	$(COMPOSE) down --rmi all --volumes --remove-orphans
+	docker rm -f ft_trans_frontend 2>/dev/null || true
+	docker rmi ft_trans_frontend 2>/dev/null || true
 
-# Reset frontend build (optional)
-fclean: clean
-	rm -rf src/requirements/frontend/dist
-
-re: fclean all
-
-.PHONY: all build up down clean fclean re
+.PHONY: all build run clean
