@@ -1,0 +1,307 @@
+----- VARIABLES -----
+
+let x = 10;			// Variable modificable
+const PI = 3.14;	// Variable constante
+var y = 5;			// Lo mismo que let pero antiguo no usar
+
+----- TIPOS BASICOS -----
+
+let num = 123;				// number
+let text = "hola";			// string
+let ok = true;				// boolean
+let nothing = null;			// null
+let undef = undefined;		// undefined
+let obj = { a: 1, b: 2 };	// object
+let arr = [1,2,3];			// array
+
+----- FUNCIONES -----
+
+function sumar(a, b)
+{
+	return a + b;
+}
+
+const restar = (a, b) => a - b;
+
+----- BUCLES -----
+
+// Se puede usar while y for de toda la vida
+
+arr.forEach(item => console.log(item));
+
+for (const item of arr) {}
+
+----- OBJETOS -----
+
+// Objeto en una linea
+// const p = {name: "Ana", age: 20 };
+
+const persona = {
+	name: "Ana",
+	age: 20,
+	saludar()
+	{
+		console.log("Hello");
+	}
+};
+
+persona.saludar();
+
+----- ARRAYS (Comandos clave) -----
+
+arr.push(x);
+arr.pop();
+arr.shift();
+arr.unshift();
+arr.includes(x);
+arr.indexOf(x);
+arr.find(fn);
+arr.filter(fn);
+arr.map(fn);
+arr.reduce(fn, inicio);
+
+----- CLASES -----
+
+class Ball
+{
+	constructor(x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+
+	move()
+	{
+		this.x += 2;
+	}
+}
+
+let miniball = new Ball(10, 10);
+
+----- DOM (Seleccionar elementos) -----
+
+document.getElementById("id");
+document.querySelector(".clase");
+document.querySelectorAll("p");
+
+----- MODIFICAR ELEMENTOS -----
+
+el.textContent = "Hola";
+el.innerHTML = "<b>Hey</b>";
+el.style.color = "red";
+el.classList.add("rojo");
+el.classList.remove("rojo");
+
+----- EVENTOS -----
+
+el.addEventListener("click", () => {
+	console.log("click!");
+});
+
+window.addEventListener("keydown", (e) => {
+	console.log(e.key);
+});
+
+//el.addEventListener("click", fn);
+//window.addEventListener("keydown", fn);
+
+----- TIMERS -----
+
+setTimeout(() => { console.log("hola"); }, 1000);
+setInterval(() => { console.log("loop"); }, 16);	// ~60 FPS
+setInterval(() => {}, 1000);
+requestAnimationFrame(loop);
+
+----- MODULOS ES6 -----
+
+export function hola() {}		// Esto es del archivo a.js
+import { hola } from "./a.js";	// Esto es del archivo b.js
+
+----- JSON -----
+
+let obj = {a: 1};
+let text = JSON.stringify(obj);
+let obj2 = JSON.parse(text);
+
+----- CANVAS 2D -----
+
+// Canvas basico
+
+const c = document.getElementById("game");
+const ctx = c.getContext("2d");
+
+ctx.clearRect(0, 0, c.width, c.height);
+ctx.fillRect(10, 10, 20, 100);
+
+
+// html
+<canvas id="game" width="800" height="600"></canvas>
+
+// Javascript
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+// Clean screen
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+// Draw rectangle
+ctx.fillStyle = "white";
+ctx.fillRect(10, 10, 20, 100);
+
+// Draw circle
+ctx.beginPath();
+ctx.arc(200, 200, 10, 0, Math.PI * 2);
+ctx.fill();
+
+
+----- ANIMACION EN CANVAS -----
+
+function loop()
+{
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	// Logica, movimiento, colisiones...
+
+	requestAnimationFrame(loop);
+}
+
+loop();
+
+----- LOCAL STORAGE -----
+
+localStorage.setItem("clave", "valor");
+localStorage.getItem("clave");
+localStorage.removeItem("clave");
+
+
+------------------------------ TYPESCRIPT --------------------------------------
+
+----- TIPOS -----
+
+let x: number = 10;
+let name: string = "ana";
+let active: boolean = true;
+
+----- INTERFACES -----
+
+interface Player
+{
+	name: string;
+	points: number;
+}
+
+----- CLASES CON TIPOS Y MODIFICADORES -----
+
+class Ball
+{
+	x: number,
+	y: number,
+
+	constructor(x: number, y: number)
+	{
+		this.x = x;
+		this.y = y;
+	}
+}
+
+----- TIPOS PERSONALIZADOS -----
+
+type Direction = "up" | "down";
+
+let d: Direction;
+
+d = "up";		// Esta bien
+d = "down";		// Esta bien
+d = "left";		// Esta mal
+
+
+type ID = string | number;
+type Answer = true | false | 0 | 1 | "yes" | "no";
+
+type Figura = 
+| {tipo: "cuadrado"; lado: number}
+| {tipo: "circulo"; radio: number};
+
+let f: Figura;
+
+// Bien
+f = {tipo: "cuadrado", lado: 10};
+f = {tipo: "circulo", radio: 5};
+
+// Mal
+f = {tipo: "cuadrado", radio: 10};
+f = {lado: 5};
+
+
+function area(figura: Figura)
+{
+	if (figura.tipo == "cuadrado")
+		return figura.lado * figura.lado;
+	if (figura.tipo == "circulo")
+		return Math.PI * figura.radio ** 2;
+}
+
+
+------------------------------ PONG --------------------------------------------
+
+----- BUCLE PRINCIPAL -----
+
+function gameLoop()
+{
+	update();	// Posiciones, fisicas, colisiones...
+	draw();		// Dibujar en el canvas
+	requestAnimationFrame(gameLoop);
+}
+gameLoop();
+
+
+----- CAPTURAR TECLAS -----
+
+let keys= {};
+
+window.addEventListener("keydown", e => keys[e.key] = true);
+window.addEventListener("keyup", e => keys[e.key] = false);
+
+if (keys["w"])
+	pala1.y += 5;
+if (keys["s"])
+	pala1.y -= 5;
+
+----- TIPOS -----
+
+type EstadoJuego =
+  | { estado: "menu" }
+  | { estado: "tournament"; jugadores: string[] }
+  | { estado: "jugando"; puntos1: number; puntos2: number }
+  | { estado: "final"; ganador: string };
+
+// Ejemplo
+let juego: EstadoJuego;
+
+juego = { estado: "menu" }; // ✔️
+juego = { estado: "tournament", jugadores: ["Ana", "Luis"] }; // ✔️
+juego = { estado: "final", ganador: "Luis" }; // ✔️
+
+juego = { estado: "final" }; // ❌ ERROR
+juego = { estado: "menu", ganador: "Luis" }; // ❌ ERROR
+
+
+function render(juego: EstadoJuego) {
+    switch (juego.estado) {
+        case "menu":
+            mostrarMenu();
+            break;
+
+        case "tournament":
+            mostrarJugadores(juego.jugadores);
+            break;
+
+        case "jugando":
+            mostrarPuntuacion(juego.puntos1, juego.puntos2);
+            break;
+
+        case "final":
+            mostrarGanador(juego.ganador);
+            break;
+    }
+}

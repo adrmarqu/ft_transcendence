@@ -1,15 +1,12 @@
-FRONTEND_DIR=src/requirements/frontend
+DC = docker-compose -f src/docker-compose.yml
 
-all: build run
+all: clear down
+	$(DC) up --build -d
 
-build:
-	docker build -t ft_trans_frontend $(FRONTEND_DIR)
+down:
+	$(DC) down
 
-run:
-	docker run -p 8080:8080 ft_trans_frontend
+clear:
+	clear
 
-clean:
-	docker rm -f ft_trans_frontend 2>/dev/null || true
-	docker rmi ft_trans_frontend 2>/dev/null || true
-
-.PHONY: all build run clean
+.PHONY: all down clear

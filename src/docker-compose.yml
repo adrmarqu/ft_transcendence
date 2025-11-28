@@ -1,6 +1,17 @@
 services:
   frontend:
     build: ./requirements/frontend
+    image: frontend
+    container_name: frontend
+    restart: always
     ports:
-      - "3000:3000"
-    image: sample_frontend
+      - "8080:8080"
+    volumes:
+      - ./requirements/frontend:/app
+    networks:
+      - pong_net
+
+networks:
+  pong_net:
+    name: pong_net
+    driver: bridge

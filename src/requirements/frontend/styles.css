@@ -1,24 +1,31 @@
-body {
-    background: #111;
-    color: #eee;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 20px;
+body
+{
+	background: gray;
+	margin: 0;
+	padding: 20px;
 }
 
-header {
+header
+{
     margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    background: #4caf50;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+h1
+{
+	color: green;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-button:hover {
-    background: #45a049;
+p
+{
+	color: yellow;
+	font-family: Helvetica;
+}
+
+canvas
+{
+	background: black;
+	border: 2px solid white;
+	display: block;
+	margin: 20px auto;
 }
