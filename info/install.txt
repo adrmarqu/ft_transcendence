@@ -1,0 +1,14 @@
+Installar
+
+npm install -g typescript
+npm install --save-dev typescript
+
+
+Compilar
+
+tsc
+
+
+Iniciar servidor
+
+npx serve .

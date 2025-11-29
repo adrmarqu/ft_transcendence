@@ -25,7 +25,7 @@ p
 canvas
 {
 	background: black;
-	border: 2px solid white;
+	border: 10px solid white;
 	display: block;
 	margin: 20px auto;
 }

@@ -305,3 +305,32 @@ function render(juego: EstadoJuego) {
             break;
     }
 }
+
+----- EXPORTAR E IMPORTAR FUNCIONES -----
+
+// Archivos: main, a
+
+// a
+
+export function fa(){}
+
+// main
+
+import {fa} from "./a";
+
+fa();
+
+----- EXPORTAR E IMPORTAR CLASES/OBJETOS/VARIABLES -----
+
+// Archivos: state, x
+
+// state
+
+export const obj = {x: 100, y:50};
+
+// x
+
+import { obj } from "./state";
+
+export function fx() { obj.x++; }
+
