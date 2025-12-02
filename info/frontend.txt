@@ -334,3 +334,91 @@ import { obj } from "./state";
 
 export function fx() { obj.x++; }
 
+------------------------------ GLOBAL VARIABLES -----------------------------------------
+
+------window------
+
+Representa la ventana del navegador, contine todo (document, localStorage...)
+Ej. window.console.log() = console.log()
+
+------document------
+
+Representa el DOM de la pagina actual
+
+------console------
+
+Para imprimir mensajes en la consola
+
+------localStorage/sessionStorage------
+
+Para guardar datos localmente en el navegador
+
+------navigator------
+
+Informacion del navegador y sistema
+
+------location------
+
+Informacion sobre la url actual y metodos para navegar
+
+------history------
+
+Permite manipular el historial del navegador
+
+------setTimeout/setInterval/clearTimeout/clearInterval------
+
+Temporizadores globales
+
+------alert/prompt/confirm------
+
+Funciones de dialogo del navegador
+
+------fetch/XMLHttpRequest------
+
+Para hacer solicitudes HTTP
+
+------------------------------ PROPIEDADES -----------------------------------------
+
+// Clase
+Class Ball {}
+
+// Instancias
+const ball1 = new Ball();
+const ball2 = new Ball();
+
+-------
+
+public: desde cualquier lugar
+
+private: solo dentro de la clase
+
+protected: solo dentro de la clase y sus sublases
+
+readonly: solo se puede asignar una vez, despues es constante
+
+static: pertenece a la clase no a la instancia. Se accede como ClassName.propiedad
+
+static readonly: constante de clase: no cambia y es compartida por todas las instancias
+
+EJ:
+
+class Ball {
+    readonly x: number;
+    static readonly RADIUS = 10;
+
+    constructor(x: number) {
+        this.x = x; // permitido
+    }
+}
+
+const b = new Ball(5);
+console.log(b.x);        // ✅ 5
+console.log(Ball.RADIUS) // ✅ 10
+b.x = 10;                // ❌ ERROR
+Ball.RADIUS = 20;        // ❌ ERROR
+
+Combinaciones:
+
+	- private readonly speed: number -> variable privada y constante para la instancia
+	- protected readonly MAX: number -> constante accesible solo desde la clase y subclases
+	- public static readonly VERSION: "1.0" -> constante global de la clase

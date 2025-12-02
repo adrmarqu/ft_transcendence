@@ -2,11 +2,8 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY . .
-
 RUN npm install -g typescript http-server
-RUN tsc
 
-EXPOSE 8080
+EXPOSE 3000
 
-CMD ["http-server", "-p", "8080", "-c-1"]
+CMD sh -c "tsc --watch & http-server -p 3000 -c-1"

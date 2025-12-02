@@ -1,11 +1,11 @@
 services:
   frontend:
-    build: ./requirements/frontend
-    image: frontend
-    container_name: frontend
+    build: 
+      context: ./requirements/frontend
+      dockerfile: Dockerfile
     restart: always
     ports:
-      - "8080:8080"
+      - "3000:3000"
     volumes:
       - ./requirements/frontend:/app
     networks:
