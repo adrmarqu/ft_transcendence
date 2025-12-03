@@ -1,5 +1,5 @@
-import { Player } from "./player.js"
-import { Ball } from "./ball.js"
+import { Player } from "./classes/player.js"
+import { Ball } from "./classes/ball.js"
 
 let	keys: { [key: string]: boolean } = {};
 
@@ -8,12 +8,13 @@ window.addEventListener("keyup", e => keys[e.key] = false);
 
 export function updatePosition(player: Player[], ball: Ball)
 {
-	player.forEach(p => 
+	ball.move();
+	player.forEach(p =>
 	{
 		if (keys[p.getUp()])
 			p.moveUp();
 		if (keys[p.getDown()])
 			p.moveDown();
+		ball.playerCollision(p);
 	});
-	ball.move();
 }
