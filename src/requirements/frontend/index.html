@@ -1,20 +1,76 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ft_transcendence</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>PONG</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
 </head>
 <body>
-    <header>
-		<h1>PING PONG</h1>
-    </header>
+    <header></header>
 
     <main id="app">
-		<canvas id="game" width="800" height="600"></canvas>
-    </main>
+		<div id="menu" class="b">
+			
+			<h1>Menu</h1>
+			<button id="start">Start</button>
+		
+		</div>
+		<div id="tournament" class="b hidden">
+		
+			<h1>Tournament</h1>
 
-    <script src="./dist/main.js" type="module"></script>
+			<form id="input">
+	<!--			<label>
+					<p>Player ID</p>
+					<input type:"text" name:"name" required>
+				</label>
+	-->		
+				<label>
+					<p>Number of players</p>
+					<input type="number" name="players" value="2">
+				</label>
+
+				<label>
+					<p>Max score</p>
+					<input type="number" name="score" value="5">
+				</label>
+				
+				<label>
+					<p>IA</p>
+					<input type="checkbox" name="ia">
+				</label><br /><br />
+				<button type="submit">Next</button>
+			</form>
+
+			<!-- Backend
+			<form action="ruta del php">
+				<label for="players">Number of players</label><br />
+				<input type="number" id="players" name="players" value="0"><br />
+				
+				<label for="score">Max score</label><br />
+				<input type="number" id="score" name="score" value="0"><br />
+
+				<input type="submit" value"Submit">
+			</form>
+			-->
+		</div>
+
+		<div id="alias" class="b hidden">
+			<h1>Alias</h1>
+		</div>
+
+		<div id="matchmaking" class="b hidden">
+		
+			<h1>Matchmaking</h1>
+
+		</div>
+		<div id="game" class="b hidden">
+			
+			<h1>Game</h1>
+		
+		</div>
+	</main>
+	<script src="./js/main.js" type="module"></script>
 </body>
 </html>

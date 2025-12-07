@@ -14,7 +14,7 @@ let players: Player[] = [
 let ball: Ball = new Ball(400, 300);
 
 let score: ScoreManager = new ScoreManager(players, 9);
-
+	
 export function gameLoop()
 {
 	updatePosition(players, ball);
